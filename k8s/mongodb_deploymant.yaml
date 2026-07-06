@@ -13,6 +13,13 @@ spec:
       labels:
         app: mongodb
     spec:
+      tolerations:
+        - key: dedicated
+          operator: Equal
+          value: apps-dev
+          effect: NoSchedule
+      nodeSelector:
+        component: apps-dev
       containers:
       - name: mongodb-pod
         image: mongo:latest
@@ -26,7 +33,7 @@ spec:
         volumeMounts:
         - name: mongo-data
           mountPath: data/mongodb
-    volumes:
-    - name: mongo-data
-      persistentVolumeClaim:
-        claimName: mongodb-pvc
+      volumes:
+        - name: mongo-data
+          persistentVolumeClaim:
+            claimName: mongodb-pvc

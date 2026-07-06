@@ -2,7 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: frontend-deployment
+  namespace: chat-app
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: frontend
@@ -19,7 +21,7 @@ spec:
       nodeSelector:
         component: apps-dev
       containers:
-      - name: myapp
+      - name: chat-app-frontend
         image: ankushgudu/chat-app-frontend:latest
         ports:
         - containerPort: 80

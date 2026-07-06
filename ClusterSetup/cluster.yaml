@@ -9,7 +9,14 @@ nodes:
         kind: InitConfiguration
         nodeRegistration:
           kubeletExtraArgs:
-            node-labels: "component=control-plane"
+            node-labels: "component=control-plane,ingress-ready=true"
+    extraPortMappings:
+      - containerPort: 80
+        hostPort: 80
+        protocol: TCP
+      - containerPort: 443
+        hostPort: 443
+        protocol: TCP
 
   # Worker node with label + taint for apps-dev
   - role: worker

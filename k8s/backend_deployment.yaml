@@ -28,3 +28,9 @@ spec:
         env:
         - name: NODE_ENV
           value: production
+        - name: MONGODB_URI
+          value: "mongodb://mongoadmin:secret@mongodb:27017/dbname?authSource=admin"
+        - name: JWT_SECRET
+          value: /;3h?-KgVSc$aBIy!W!7}-(W+A#O;xwJu:b/>qYwS*v&EXGUzE2r(njr&>]T!;-FY!e20IbXnURQq+2z.Na|7P
+        - name: PORT
+          value: "5001"
