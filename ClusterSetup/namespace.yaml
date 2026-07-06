@@ -1,0 +1,14 @@
+kind: Namespace
+apiVersion: v1
+metadata: 
+  name: chat-app
+---
+kind: Namespace
+apiVersion: v1
+metadata: 
+  name: argocd
+---
+kind: Namespace
+apiVersion: v1
+metadata: 
+  name: monitoring

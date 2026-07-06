@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+spec:
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      tolerations:
+        - key: dedicated
+          operator: Equal
+          value: apps-dev
+          effect: NoSchedule
+      nodeSelector:
+        component: apps-dev
+      containers:
+      - name: myapp
+        image: ankushgudu/chat-app-frontend:latest
+        ports:
+        - containerPort: 80

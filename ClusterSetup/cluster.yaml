@@ -1,0 +1,47 @@
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: demo-project-cluster
+nodes:
+  # Control plane node
+  - role: control-plane
+    kubeadmConfigPatches:
+      - |
+        kind: InitConfiguration
+        nodeRegistration:
+          kubeletExtraArgs:
+            node-labels: "component=control-plane"
+
+  # Worker node with label + taint for apps-dev
+  - role: worker
+    kubeadmConfigPatches:
+      - |
+        kind: JoinConfiguration
+        nodeRegistration:
+          kubeletExtraArgs:
+            node-labels: "component=apps-dev"
+          taints:
+            - key: dedicated
+              value: apps-dev
+              effect: NoSchedule
+
+  # Worker node with label + taint for apps-test
+  - role: worker
+    kubeadmConfigPatches:
+      - |
+        kind: JoinConfiguration
+        nodeRegistration:
+          kubeletExtraArgs:
+            node-labels: "component=apps-test"
+          taints:
+            - key: dedicated
+              value: apps-test
+              effect: NoSchedule
+
+  # NEW: Worker node for platform tools (ArgoCD, Prometheus, etc.) — NO taint
+  - role: worker
+    kubeadmConfigPatches:
+      - |
+        kind: JoinConfiguration
+        nodeRegistration:
+          kubeletExtraArgs:
+            node-labels: "component=platform-tools"

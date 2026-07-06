@@ -1,0 +1,54 @@
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: dev-container-limits
+  namespace: apps-dev
+spec:
+  limits:
+  - default:                # If a deployment doesn't specify limits, it gets these:
+      cpu: "200m"           
+      memory: "256Mi"       
+    defaultRequest:         # If a deployment doesn't specify requests, it gets these:
+      cpu: "100m"           
+      memory: "128Mi"       
+    max:                    # No single container can ever ask for more than this:
+      cpu: "500m"
+      memory: "512Mi"
+    type: Container
+
+---
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: test-container-limits
+  namespace: apps-test
+spec:
+  limits:
+  - default:                # If a deployment doesn't specify limits, it gets these:
+      cpu: "200m"           
+      memory: "256Mi"       
+    defaultRequest:         # If a deployment doesn't specify requests, it gets these:
+      cpu: "100m"           
+      memory: "128Mi"       
+    max:                    # No single container can ever ask for more than this:
+      cpu: "500m"
+      memory: "512Mi"
+    type: Container
+---
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: prod-container-limits
+  namespace: apps-prod
+spec:
+  limits:
+  - default:                # If a deployment doesn't specify limits, it gets these:
+      cpu: "200m"           
+      memory: "256Mi"       
+    defaultRequest:         # If a deployment doesn't specify requests, it gets these:
+      cpu: "100m"           
+      memory: "128Mi"       
+    max:                    # No single container can ever ask for more than this:
+      cpu: "500m"
+      memory: "512Mi"
+    type: Container
